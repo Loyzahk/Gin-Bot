@@ -22,7 +22,7 @@ async def wlc(ctx):
 
 @bot.command()
 async def owner(ctx):
-    await ctx.send('The owner is the TSR Staff Team')
+    await ctx.send('Loyzan#5782 (Vlad).')
 
 
 @bot.command(name='99')
@@ -38,6 +38,10 @@ async def nine_nine(ctx):
             'Loyzan noob'
 
         ),
+        (
+            'I DONT USE PROGRAMS I PROMISE'
+
+        )
     ]
 
     response = random.choice(brooklyn_99_quotes)
@@ -63,8 +67,10 @@ async def help(ctx):
     des = """
    TSR is here!
   > Prefix:  t!\n
-  > contact : If you want suggest or report a issue send to Discord: Ahk#7009 or jap#4777 or Python#0404 \n
-  > rank : Show you the actual Global Rank (disabled)\n
+  > contact : If you want suggest or report a issue send to Discord: Loyz ahk#7009 or jap#4777 or Python#0404 \n
+  > info : Transformice survivor ranking information
+  > owner: You can see who is the owner of the bot.
+  > rank : Show you the actual Global Rank\n
   > esrank : Show you the actual ES Rank\n
   > rorank : Show you the actual RO Rank\n
   > brrank : Show you the actual BR Rank\n
@@ -73,6 +79,9 @@ async def help(ctx):
   > efrank : Show you the actual EN/FR Rank\n
   > rurank : Show you the actual RU Rank\n
   > arrank : Show you the actual AR Rank\n
+  > tier : Show you the actual Tiers (ISR)
+  > isr : Internation tier ranking information
+  > "search the nine nine"
   """
     embed = discord.Embed(
         title="Ranking",
@@ -414,8 +423,77 @@ async def rurefs(ctx):
     await ctx.send('https://prnt.sc/22fecef') #RU
 
 
-print('Japq noob')
 
+
+#ISR COMMANDS
+
+@bot.command()
+async def isr(ctx):
+  await ctx.send(
+    'https://international-survivor-ranking.webnode.es/contact/ https://discord.gg/q5yFnmEVfJ'
+  )
+
+@bot.command()
+async def tier(ctx):
+    des = """ 
+ If some position was changed pls notify me :D
+
+🇹ℹ️🇪:regional_indicator_r: :one:
+1. Darkicarax#1337 (RO)👑 
+2. Dannyer092#0000 (RO) 💎 
+3 Black_xx#4260 (BR) 🧮
+4. Tunblex#3049 (ES))  ♟️
+5.  Xmikserkulx#7088 (PL) ♟️
+
+
+🇹ℹ️🇪:regional_indicator_r: :two:
+1.Brunelle#8692 (FR)   👑
+2. Ustahue#0000 (ES) 💎
+3.   Leogre#0000 (FR) 🧮
+4. +Lamama#0000// Airon#2528 (RU) ♟️
+5. Ougoundare#0000 (FR)  ♟️
+
+
+🇹ℹ️🇪:regional_indicator_r: :three:
+1. Litlearenan#0000 (BR) 👑
+2. Andybst#0000 (RO)  💎
+3. Chaos#2589 (BR)    🧮
+4. Onomatopeia#6666 (BR)   ♟️
+5. Your_shadow#0000 (PL)  ♟️
+
+🇹ℹ️🇪:regional_indicator_r: :four:""
+1.  Ougoundare#0000 (FR) 👑
+2.  Jokaspra#0927 (RO) 💎
+3.  Prroblackops#0000 (FR) 🧮
+4.  Somrak#8801 (EN) ♟️
+5.  Betzefer#4579 (ES) ♟️
+
+🇹ℹ️🇪:regional_indicator_r: :five:
+1. Kolpolnolko#0000 (ES) // Tpseo#3761  👑
+2. Japq#5404(RO) 💎
+3. Falllen_x#0310 🧮
+4. Vacant ♟️
+5. Vacant ♟️ 
+
+You can verify that in :
+https://international-survivor-ranking.webnode.es/rank/
+ 
+  """
+    embed = discord.Embed(
+        title="International Tier Ranking",
+        url="https://cdn.discogfgfgfgfrdapp.com/avatars/915204948961165392/401b786f6282ed2afb305875706794a6.png?size=1024",
+        description=des,
+        timestamp=datetime.datetime.utcnow(),
+        color=discord.Color.blue())
+    embed.set_footer(text="Requested by: {}".format(ctx.author.name))
+    embed.set_author(
+        name="International survivor ranking",
+        icon_url="https://cdn.discordapp.com/avatars/917125643781689404/8e7223452ab6bdb7d739dfca48ae4d5b.png?size=1024%22"
+    )
+
+    await ctx.send(embed=embed)
+
+print('Muak <3 :33333333333333 (xd)')
 
 bot.run('OTE3MTI1NjQzNzgxNjg5NDA0.Ya0J0A.UHC52cE4OZf7dv5Depk0CX9fWtE')
 
