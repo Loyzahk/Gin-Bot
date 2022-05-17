@@ -1,16 +1,5 @@
-from ast import Delete
-import datetime
-import pprint
 import discord
-from discord.enums import Status
 from discord.ext import commands
-import random
-import os
-import time
-import asyncio
-from discord.ext import commands
-from discord.ext.commands import Bot
-import functools
 
 bot = commands.Bot(command_prefix="g!", description="Gin'Bot", help_command=None)
 
