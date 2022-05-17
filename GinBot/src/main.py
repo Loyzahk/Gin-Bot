@@ -30,8 +30,6 @@ async def on_message(message):
         )
     if "Gin'ebra" in message.content:
         await message.channel.send(f"I'm ready my lord")
-    # if "By order of Gin company" in message.content:
-    # await message.channel.send(f"By order of Gin company")
     else:
         await bot.process_commands(message)
 
@@ -51,30 +49,19 @@ async def av(ctx, member: discord.Member = None):
     await ctx.send(embed=avatar)
 
 
-#
-
-
 @bot.command()
 async def ping(ctx):
     await ctx.send(f"Ping: {round(bot.latency * 1000)}ms")
-
-
-# @bot.command() IM TRYING TO MAKE A CHANNEL Deleter
-# async def nuke(ctx):
-#   await ctx.delete
 
 
 @bot.event
 async def on_ready():
     await bot.change_presence(
         status=discord.Status.idle,
-        activity=discord.Activity(
-            type=discord.ActivityType.watching, name="g!"
-        ),
+        activity=discord.Activity(type=discord.ActivityType.watching, name="g!"),
     )
 
 
 print("Im Ready My Lord Now 24/7")
-
 
 bot.run("OTE3ODIyMzAyMDUyMjg2NDg0.GidZFN.Fsitg-tDu8plxWmJoKISV5OBHdMRMFiMLeBlWI")
