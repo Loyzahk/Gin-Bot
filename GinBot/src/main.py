@@ -43,6 +43,34 @@ async def ping(ctx):
     await ctx.send(f"Ping: {round(bot.latency * 1000)}ms")
 
 
+@bot.command()
+async def help(ctx):
+    des = """
+  I'm Gin'ebra, hello.
+My commands are:
+av = shows user avatar
+ping = chek ping
+kick/unkick
+ban/unban
+wlc
+thanks for call me. :tophat: """
+
+    embed = discord.Embed(
+        title="Gin'ebra",
+        descriptionurl="https://cdn.discordapp.com/avatars/917822302052286484/cc70991418a2c144387743956ea35f72.webp?size=1024",
+        description=des,
+        timestamp=datetime.datetime.utcnow(),
+        color=discord.Color.blue(),
+    )
+    embed.set_footer(text="Requested by: {}".format(ctx.author.name))
+    embed.set_author(
+        name="Gin'ebra Company",
+        icon_url="https://cdn.discordapp.com/avatars/917822302052286484/cc70991418a2c144387743956ea35f72.webp?size=1024",
+    )
+
+    await ctx.send(embed=embed)
+
+
 @bot.event
 async def on_ready():
     await bot.change_presence(
