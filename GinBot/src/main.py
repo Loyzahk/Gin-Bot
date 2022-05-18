@@ -1,4 +1,5 @@
 import datetime
+import functools
 import discord
 from discord.ext import commands
 
@@ -47,31 +48,36 @@ async def ping(ctx):
 @bot.command()
 async def help(ctx):
     des = """
-  I'm Gin'ebra, hello.
-My commands are:
-av = shows user avatar
-ping = chek ping
-kick/unkick
-ban/unban
-wlc
-thanks for call me. :tophat: """
+ :gem: **My commands are**:
+ - "av" | **To see the avatar**
+ - "ping" | **To check the network connection**
+ - "kick/unkick"
+ - "ban/unban"
+ - "wlc" | **Give the welcomes !** :smile: 
+ """
 
     embed = discord.Embed(
-        title="Gin'ebra",
-        descriptionurl="https://cdn.discordapp.com/avatars/917822302052286484/cc70991418a2c144387743956ea35f72.webp?size=1024",
+        title="I'm Gin'ebra , Sup!!",
+        descriptionurl="https://cdn.discordapp.com/avatars/917822302052286484/cc70991418a2c144387743956ea35f72.webp?size=1024x28",
         description=des,
         timestamp=datetime.datetime.utcnow(),
-        color=discord.Color.blue(),
+        color=0x000000,
     )
     embed.set_footer(text="Requested by: {}".format(ctx.author.name))
     embed.set_author(
         name="Gin'ebra Company",
-        icon_url="https://cdn.discordapp.com/avatars/917822302052286484/cc70991418a2c144387743956ea35f72.webp?size=1024",
+        icon_url="https://cdn.discordapp.com/avatars/917822302052286484/cc70991418a2c144387743956ea35f72.webp?size=1024x256",
     )
 
     await ctx.send(embed=embed)
+    await ctx.send('Thank you for call me! :tophat:')
+
+@bot.command()
+async def wlc(ctx):
+    await ctx.send(f"¡Welcome to the server! ")
 
 
+ 
 @bot.event
 async def on_ready():
     await bot.change_presence(
