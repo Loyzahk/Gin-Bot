@@ -1,3 +1,5 @@
+import code
+from collections import UserDict
 from inspect import indentsize
 import os
 from typing import AsyncIterable
@@ -8,18 +10,22 @@ import discord
 from discord.ext import commands
 import asyncio
 
+
 async def determine_prefix(bot, message):
     guild = message.guild
     if guild:
         return custom_prefixes.get(guild.id, default_prefixes)
     else:
         return default_prefixes
-    
-bot = commands.Bot(command_prefix = determine_prefix , description="Gin'Bot", help_command=None)
+
+
+bot = commands.Bot(
+    command_prefix=determine_prefix, description="Gin'Bot", help_command=None
+)
 custom_prefixes = {}
-#possibly using the json module to save and load
-#or a database
-default_prefixes = ['g!']
+# possibly using the json module to save and load
+# or a database
+default_prefixes = ["g!"]
 ###########################################
 @bot.command()
 @commands.has_permissions(administrator=True)
@@ -27,6 +33,8 @@ default_prefixes = ['g!']
 async def setprefix(ctx, *, prefixes=""):
     custom_prefixes[ctx.guild.id] = prefixes.split() or default_prefixes
     await ctx.send(f"Prefixes set to `{prefixes}` ")
+
+
 intents = discord.Intents.all()
 intents.members = True
 client = discord.Client(intents=intents)
@@ -46,12 +54,19 @@ async def on_message(message):
     else:
         await bot.process_commands(message)
 
+
+# ()
+
+#dont work
 @bot.command()
-async def script(ctx):
-    code = "14151617a"
-    await ctx_send:("Please enter your code")
-        await ctx_send:("web")
-        
+async def src(ctx):
+    await ctx.send(f"Please write the code below")
+    username = str(message.author).split("#")[0]
+    if "{code}" in message.content:
+        code = "020"
+        message = on_message = message.author
+        await message.channel.send(f"test")
+
 
 @bot.command()
 async def av(ctx, member: discord.Member = None):
@@ -99,7 +114,6 @@ async def help(ctx):
 
     await ctx.send(embed=embed)
     await ctx.send("Thank you for call me! :tophat:")
-
 
 
 # Wlc
@@ -183,17 +197,24 @@ async def fox(ctx):
 #######
 
 
-
 ################ROLES
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.role_message_id = 0  # ID of the message that can be reacted to to add/remove a role.
+        self.role_message_id = (
+            0  # ID of the message that can be reacted to to add/remove a role.
+        )
         self.emoji_to_role = {
-            discord.PartialEmoji(name="🔴"): 0,  # ID of the role associated with unicode emoji '🔴'.
-            discord.PartialEmoji(name="🟡"): 0,  # ID of the role associated with unicode emoji '🟡'.
-            discord.PartialEmoji(name="green", id=0): 0,  # ID of the role associated with a partial emoji's ID.
+            discord.PartialEmoji(
+                name="🔴"
+            ): 0,  # ID of the role associated with unicode emoji '🔴'.
+            discord.PartialEmoji(
+                name="🟡"
+            ): 0,  # ID of the role associated with unicode emoji '🟡'.
+            discord.PartialEmoji(
+                name="green", id=0
+            ): 0,  # ID of the role associated with a partial emoji's ID.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
@@ -260,15 +281,17 @@ class MyClient(discord.Client):
         except discord.HTTPException:
             # If we want to do something in case of errors we'd do it here.
             pass
-####
-##
+
+    ####
+    ##
 
     async def on_member_join(self, member):
         guild = member.guild
         if guild.system_channel is not None:
             to_send = f"Welcome {member.mention} to {guild.name}!"
             await guild.system_channel.send(to_send)
-            
+
+
 ####
 print("Im Ready My Lord Now 24/7")
 
