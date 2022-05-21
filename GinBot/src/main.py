@@ -10,6 +10,7 @@ import discord
 from discord.ext import commands
 import asyncio
 
+#you make changes 
 
 async def determine_prefix(bot, message):
     guild = message.guild
@@ -46,9 +47,7 @@ async def on_message(message):
     if "Gin'scord" in message.content:
         await message.channel.send(f"Gin comunnity https://dsc.gg/ginebra")
     if "What's Ginebra?" in message.content:
-        await message.channel.send(
-            f"We're a company dedicated to dont answer questions."
-        )
+        await message.channel.send(f"We're a company dedicated to dont answer questions.")
     if "Gin'ebra" in message.content:
         await message.channel.send(f"I'm ready my lord")
     else:
