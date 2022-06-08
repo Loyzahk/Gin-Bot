@@ -80,7 +80,7 @@ async def av(ctx, member: discord.Member = None):
 async def ping(ctx):
     await ctx.send(f"Ping: {round(bot.latency * 1000)}ms")
 
-
+#help
 @bot.command()
 async def help(ctx):
     des = """
@@ -113,14 +113,15 @@ async def help(ctx):
 @bot.command()
 async def wlc(ctx):
     guild = ctx.guild
-    gif1 = [ "https://tenor.com/view/peaky-blinders-john-shelby-gif-11333816", "https://tenor.com/view/paul-anderson-peaky-blinders-arthur-shelby-jr-im-here-i-just-arrive-gif-17776757"]
+    gif1 = [
+        "https://tenor.com/view/peaky-blinders-john-shelby-gif-11333816",
+        "https://tenor.com/view/paul-anderson-peaky-blinders-arthur-shelby-jr-im-here-i-just-arrive-gif-17776757",
+            ]
     await ctx.send(f"**Welcome to {guild.name}!!!**:partying_face: :tophat: ")
     await ctx.send(random.choice(gif1))
 
 
 ## State
-
-
 @bot.event
 async def on_ready():
     await bot.change_presence(
