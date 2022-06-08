@@ -9,8 +9,10 @@ import datetime
 import discord
 from discord.ext import commands
 import asyncio
+import random
 
-#you make changes 
+# you make changes
+
 
 async def determine_prefix(bot, message):
     guild = message.guild
@@ -47,7 +49,9 @@ async def on_message(message):
     if "Gin'scord" in message.content:
         await message.channel.send(f"Gin comunnity https://dsc.gg/ginebra")
     if "What's Ginebra?" in message.content:
-        await message.channel.send(f"We're a company dedicated to dont answer questions.")
+        await message.channel.send(
+            f"We're a company dedicated to dont answer questions."
+        )
     if "Gin'ebra" in message.content:
         await message.channel.send(f"I'm ready my lord")
     else:
@@ -55,16 +59,6 @@ async def on_message(message):
 
 
 # ()
-
-#dont work
-@bot.command()
-async def src(ctx):
-    await ctx.send(f"Please write the code below")
-    username = str(message.author).split("#")[0]
-    if "{code}" in message.content:
-        code = "020"
-        message = on_message = message.author
-        await message.channel.send(f"test")
 
 
 @bot.command()
@@ -119,9 +113,9 @@ async def help(ctx):
 @bot.command()
 async def wlc(ctx):
     guild = ctx.guild
-    gif = "https://tenor.com/view/peaky-blinders-john-shelby-gif-11333816"
+    gif1 = [ "https://tenor.com/view/peaky-blinders-john-shelby-gif-11333816", "https://tenor.com/view/paul-anderson-peaky-blinders-arthur-shelby-jr-im-here-i-just-arrive-gif-17776757"]
     await ctx.send(f"**Welcome to {guild.name}!!!**:partying_face: :tophat: ")
-    await ctx.send(gif)
+    await ctx.send(random.choice(gif1))
 
 
 ## State
