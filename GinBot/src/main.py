@@ -2,17 +2,16 @@ import code
 from collections import UserDict
 from inspect import indentsize
 import os
-from typing import AsyncIterable
-import requests
 import json
 import datetime
 import discord
 from discord.ext import commands
 import asyncio
 import random
+import requests
+import aiohttp
 
 # you make changes
-
 
 async def determine_prefix(bot, message):
     guild = message.guild
@@ -119,8 +118,7 @@ async def wlc(ctx):
             ]
     await ctx.send(f"**Welcome to {guild.name}!!!**:partying_face: :tophat: ")
     await ctx.send(random.choice(gif1))
-
-
+    
 ## State
 @bot.event
 async def on_ready():
@@ -128,11 +126,7 @@ async def on_ready():
         status=discord.Status.idle,
         activity=discord.Activity(type=discord.ActivityType.watching, name="g!"),
     )
-
-
 ##ban/unban##
-
-
 @bot.command()
 async def ban(ctx, user: discord.User):
     guild = ctx.guild
@@ -153,14 +147,7 @@ async def unban(ctx, user: discord.User):
     if ctx.author.guild_permissions.ban_members:
         await ctx.send(embed=ashwinegay)
         await guild.unban(user=user)
-
-
-####
-
-
 ####purge /clear commands
-
-
 @bot.command(pass_context=True)
 @commands.has_permissions(administrator=True)
 async def purge(ctx, limit: int):
@@ -168,125 +155,22 @@ async def purge(ctx, limit: int):
     await ctx.send("Cleared by {}".format(ctx.author.mention))
     await ctx.message.delete()
 
-
 @purge.error
 async def clear_error(ctx, error):
     if isinstance(error.command.MissingPermissions):
         await ctx.send("You don't have enough permissions!")
-
-
-####
-
-
-@bot.command()
-async def fox(ctx):
-    response = requests.get("https://some-random-api.ml/img/fox")  # Get-
-    json_data = json.loads(response.text)  #  JSON
-
-    embed = discord.Embed(color=0xFF9900, title="Random Fox")  #  Embed'a
-    embed.set_image(url=json_data["link"])  #   Embed'a
-    await ctx.send(embed=embed)  #  Embed
-
-
 #######
 
+@bot.command(pass_context=True)
+async def meme(ctx):
+    embed = discord.Embed(title="", description="")
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            
+            await ctx.send(embed=embed)
+            
+print ("Im Ready My Lord Now 24/7")
 
-################ROLES
-class MyClient(discord.Client):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.role_message_id = (
-            0  # ID of the message that can be reacted to to add/remove a role.
-        )
-        self.emoji_to_role = {
-            discord.PartialEmoji(
-                name="🔴"
-            ): 0,  # ID of the role associated with unicode emoji '🔴'.
-            discord.PartialEmoji(
-                name="🟡"
-            ): 0,  # ID of the role associated with unicode emoji '🟡'.
-            discord.PartialEmoji(
-                name="green", id=0
-            ): 0,  # ID of the role associated with a partial emoji's ID.
-        }
-
-    async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
-        """Gives a role based on a reaction emoji."""
-        # Make sure that the message the user is reacting to is the one we care about.
-        if payload.message_id != self.role_message_id:
-            return
-
-        guild = self.get_guild(payload.guild_id)
-        if guild is None:
-            # Check if we're still in the guild and it's cached.
-            return
-
-        try:
-            role_id = self.emoji_to_role[payload.emoji]
-        except KeyError:
-            # If the emoji isn't the one we care about then exit as well.
-            return
-
-        role = guild.get_role(role_id)
-        if role is None:
-            # Make sure the role still exists and is valid.
-            return
-
-        try:
-            # Finally, add the role.
-            await payload.member.add_roles(role)
-        except discord.HTTPException:
-            # If we want to do something in case of errors we'd do it here.
-            pass
-
-    async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
-        """Removes a role based on a reaction emoji."""
-        # Make sure that the message the user is reacting to is the one we care about.
-        if payload.message_id != self.role_message_id:
-            return
-
-        guild = self.get_guild(payload.guild_id)
-        if guild is None:
-            # Check if we're still in the guild and it's cached.
-            return
-
-        try:
-            role_id = self.emoji_to_role[payload.emoji]
-        except KeyError:
-            # If the emoji isn't the one we care about then exit as well.
-            return
-
-        role = guild.get_role(role_id)
-        if role is None:
-            # Make sure the role still exists and is valid.
-            return
-
-        # The payload for `on_raw_reaction_remove` does not provide `.member`
-        # so we must get the member ourselves from the payload's `.user_id`.
-        member = guild.get_member(payload.user_id)
-        if member is None:
-            # Make sure the member still exists and is valid.
-            return
-
-        try:
-            # Finally, remove the role.
-            await member.remove_roles(role)
-        except discord.HTTPException:
-            # If we want to do something in case of errors we'd do it here.
-            pass
-
-    ####
-    ##
-
-    async def on_member_join(self, member):
-        guild = member.guild
-        if guild.system_channel is not None:
-            to_send = f"Welcome {member.mention} to {guild.name}!"
-            await guild.system_channel.send(to_send)
-
-
-####
-print("Im Ready My Lord Now 24/7")
-
-bot.run("OTE3ODIyMzAyMDUyMjg2NDg0.GidZFN.Fsitg-tDu8plxWmJoKISV5OBHdMRMFiMLeBlWI")
+bot.run("OTE3ODIyMzAyMDUyMjg2NDg0.GQiUD1.Xu-pRG-Y1PsAE_7Gh-y1eXKsvxZTVlwQK3ecQE")
